@@ -1,6 +1,16 @@
 const fs = require('fs');
 const _ = require('lodash');
 const yargs =require('yargs');
-const myGeoAPI =require('./playground/myGeoAPI.js')
-const argv=yargs.argv;
-var command=argv._[0];
+const request = require('request');
+const myGeoAPI =require('./leo-maps/myGeoAPI.js');
+
+request({
+  url:'https://api.nasa.gov/planetary/apod?api_key=',
+  //json:true,
+  eventUri:'http://eventregistry.org/event/eng-4766398',
+  resultType: 'articleUris',
+  keyword:'trump',
+
+},(error,response,body)=>{
+  console.log(body);
+});
