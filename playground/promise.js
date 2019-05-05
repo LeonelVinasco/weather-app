@@ -9,7 +9,13 @@ return new Promise((resolve,reject)=>{
   },1500);
 });
 
-}
+};
+
+asyncAdd(5,7).then((res)=>{
+  console.log('result ',res);
+}, (errorMessage)=>{
+  console.log(errorMessage);
+});
 
 var somePromise = new Promise((resolve,reject)=>{
   setTimeout(()=>{
