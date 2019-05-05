@@ -11,11 +11,17 @@ var getWeather= (lat,long, callback)=>{
     }else if(response.statusCode === 400){
       callback('Unable to fetch weather');
     }else if(response.statusCode===200){
-      callback(undefined,body.currently.temperature);
+
+      callback(undefined,{
+        temperature:body.currently.temperature,
+        apparentTemperature:body.currently.apparentTemperature
+
+     });
+
     }
   });
+};
 
-}
 
 module.exports={
   getWeather

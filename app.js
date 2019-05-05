@@ -3,14 +3,34 @@
   const yargs =require('yargs');
   const request = require('request');
   const myGeoAPI =require('./leo-maps/myGeoAPI.js');
-  const geoCode= require('./geocode/geocode.js');
+  const geocode= require('./geocode/geocode.js');
   const weather=require('./weather/weather.js')
+  const argv = yargs
+  .options({
+     a:{
+       demand:true,
+       alias:'address',
+       describe: 'address to fetch weather for',
+       string: true //to make sure user add data
+     }
+  })
+  .help()
+  .alias('help','h')
+  .argv;
 
-
-weather.getWeather(37.8267,-122.4233, (ErrorMessage,weatherResults)=>{
-  if(ErrorMessage){
-    console.log(ErrorMessage);
+geocode.getGeocode(12,(errorMessage,results)=>{
+  if(errorMessage){
+    console.log('error maps');
   }else{
-    console.log(JSON.stringify(results,undefined,2);
+    console.log(results.lat);
+    console.log(results.long);
+    console.log(results.title);
+    weather.getWeather(37.8267,-122.4233, (errorMessage,weatherResults)=>{
+      if(errorMessage){
+        console.log(errorMessage);
+      }else{
+        console.log(JSON.stringify(weatherResults,undefined,2));
+      }
+    });
   }
 });
