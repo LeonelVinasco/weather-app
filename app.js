@@ -1,31 +1,35 @@
-const fs = require('fs');
-const _ = require('lodash');
-const yargs =require('yargs');
-const request = require('request');
-const myGeoAPI =require('./leo-maps/myGeoAPI.js');
+// const fs = require('fs');
+// const _ = require('lodash');
+// const yargs =require('yargs');
+// const request = require('request');
+// const myGeoAPI =require('./leo-maps/myGeoAPI.js');
+// const geoCode= require('./geocode/geocode.js');
+//
+// const argv = yargs
+// .options({
+//    a:{
+//      demand:true,
+//      alias:'address',
+//      describe: 'address to fetch weather for',
+//      string: true //to make sure user add data
+//    }
+// })
+// .help()
+// .alias('help','h')
+// .argv;
+//1f7c04cd3b6d02d7bc49904ebffb58ad
+const request =require('request');
 
-const argv = yargs
-.options({
-   a:{
-     demand:true,
-     alias:'address',
-     describe: 'address to fetch weather for',
-     string: true //to make sure user add data
-   }
-})
-.help()
-.alias('help','h')
-.argv;
-
-var encodedAddress=encodeURIComponent(argv.address);
-
-
-console.log(`argv+${argv.address}`);
 request({
-  url:`https://api.nasa.gov/planetary/apod?api_key=vgeo26FRotjabELs3fhIxCQ7W1iH4CeMrwAAbzmN?city=${encodedAddress}`,
-  json:true,
+ulr: 'https://api.darksky.net/forecast/1f7c04cd3b6d02d7bc49904ebffb58ad/37.8267,-122.4233',
+json:true
+
 },(error,response,body)=>{
-  console.log(body.date);
-  console.log(body.url);
-  console.log(body.title);
-});
+  if (error){
+    console.log('Unable to connect to darksky')
+  }else if(response.statusCode === 400){
+    console.log('Unable to fetch weather');
+  }else if(response.statusCode===200){
+    console.log('body.currently.temperature');
+  }
+})
