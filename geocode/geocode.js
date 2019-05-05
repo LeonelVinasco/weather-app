@@ -1,8 +1,7 @@
 var request=require('request');
-console.log('imhere');
 var getGeocode=(address,callback)=>{
-  var encodedAddress=encodeURIComponent(address);
-console.log('imhere2');
+var encodedAddress=encodeURIComponent(address);
+
 
 
   //console.log(`argv+${encodedAddress}`);

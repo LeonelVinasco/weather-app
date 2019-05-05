@@ -25,7 +25,7 @@ geocode.getGeocode(12,(errorMessage,results)=>{
     console.log(results.lat);
     console.log(results.long);
     console.log(results.title);
-    weather.getWeather(37.8267,-122.4233, (errorMessage,weatherResults)=>{
+    weather.getWeather(results.lat,results.long, (errorMessage,weatherResults)=>{
       if(errorMessage){
         console.log(errorMessage);
       }else{
